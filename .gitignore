@@ -1,0 +1,3 @@
+.env
+mysql_volume/*
+sql/init.sql
