@@ -48,8 +48,29 @@ services:
     networks:
       - backend_network
 
+  react:
+    build:
+      context: ./frontend/react
+      dockerfile: Dockerfile
+    volumes:
+      - ./:/usr/src/app
+    ports:
+      - 3000:3000
+    command: sh -c "cd frontend/react && npm start"
+  # フロントエンドnginxは一旦保留してreactはnodeで動かす
+  # frontend-server:
+  #   image: nginx
+  #   container_name: nginx
+  #   ports:
+  #     - 80:80
+  #   volumes:
+  #     - ./frontend/nginx/:/etc/nginx/conf.d/
+  #   depends_on:
+  #     - react_app
 networks:
   backend_network:
+    driver: bridge
+  frontend_network:
     driver: bridge
 volumes:
   static_volume:
