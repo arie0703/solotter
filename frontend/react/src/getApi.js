@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import './index.css';
 
 class GetAPI extends Component {
   constructor(props) {
@@ -9,33 +10,45 @@ class GetAPI extends Component {
       items: []
     };
   }
-  componentDidMount() { //render直後に行いたい処理を書くところ
+  componentDidMount = async() => { //render直後に行いたい処理を書くところ
 
-    axios.defaults.baseURL = 'http://localhost:3000';
-    axios.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8';
-    axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
-    axios.get('http://localhost:8080/api', { 
-      withCredentials: true
+    let instance = axios.create({
+      baseURL: 'http://localhost:8080',
     })
-    .then(res => {
-        console.log(res.data)
-    })
+
+    try {
+      const response = await instance.get('/api/')
+      console.log(response.data)
+      this.setState({
+        items: response.data,
+        isLoaded: true
+      })
+
+      console.log(this.state.items)
+
+      for (const item of this.state.items) {
+        console.log(item)
+        console.log(item.body)
+      }
+    } catch (e) {
+      console.log(e);
+    }
   }
 
 
   render() {
     var { items, isLoaded } = this.state;
-console.log(items);
     if (!isLoaded) {
       return <div>...Loading</div>;
     } else {
       return (
-        <div>
-          <ul>
-            {Object.keys(items).map(key => (
-              <li key={key}>{key} - {items[key]}</li>
-            ))}
-          </ul>
+        <div class="post_list">
+          <p>Solotter</p>
+          {items.map((item) => (
+            <div class="post" key={item.id}>
+              <p>{item.body}</p>
+            </div>
+          ))}
         </div>
       );
     }
