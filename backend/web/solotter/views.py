@@ -6,7 +6,7 @@ from .serializers import PostSerializer
 from .serializers import CategorySerializer
 
 class ListPost(generics.ListAPIView):
-    queryset = Post.objects.all()
+    queryset = Post.objects.order_by('-created_at')
     serializer_class = PostSerializer
 
 class ListCategory(generics.ListAPIView):
