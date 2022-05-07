@@ -27,6 +27,7 @@ class NewPost extends Component {
 
         instance.post('/api/posts/new', {
             body: values.target.body.value,
+            likes: 0,
         }).then(function (response) {
             console.log(response.data);
         })
@@ -37,7 +38,6 @@ class NewPost extends Component {
     render() {
         return (
         <div className="newPost">
-            
             <form onSubmit={this.handleSubmit.bind(this)} class="post_form">
             <Box sx={{display: "flex", margin: "0 auto", justifyContent: "center", width: "80%"}}>
             <TextField

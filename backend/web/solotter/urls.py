@@ -1,5 +1,5 @@
 from django.urls import path, include
-from .views import ListPost, ListCategory, DetailPost, CreatePost, DeletePost
+from .views import ListPost, ListCategory, DetailPost, CreatePost, DeletePost, UpdatePost
 from rest_framework import routers
 
 urlpatterns = [
@@ -7,6 +7,7 @@ urlpatterns = [
     path('posts', ListPost.as_view()),
     path('posts/new', CreatePost.as_view()),
     path('posts/delete/<int:pk>', DeletePost.as_view()),
+    path('posts/update/<int:pk>', UpdatePost.as_view()),
     path('category', ListCategory.as_view()),
 ]
 

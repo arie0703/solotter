@@ -2,14 +2,7 @@ import React, { Component, useState, useEffect  } from 'react';
 import axios from 'axios';
 import './index.css';
 import NewPost from './components/newPost';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import DeleteIcon from '@mui/icons-material/Delete';
-import IconButton from '@mui/material/IconButton';
-import FavoriteIcon from '@mui/icons-material/Favorite';
+import PostCard from './components/PostCard';
 
 const App = ()  => {
   const [isLoaded, setLoad] = useState(false)
@@ -59,25 +52,11 @@ const App = ()  => {
             />
           </div>
           {posts.map((item) => (
-            <Card class="post">
-              <CardContent>
-                <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                  {item.body}
-                </Typography>
-                <Typography variant="caption">
-                  {item.created_at}
-                </Typography>
-              </CardContent>
-              <CardActions sx={{display: "flex"}}>
-                <IconButton sx={{color: "#bbb"}} onClick={() => {deletePost(item.id)}}>
-                  <DeleteIcon />
-                </IconButton>
-                <IconButton sx={{color: "#fc94af"}} onClick={() => {console.log("favorite")}}>
-                  <FavoriteIcon />
-                </IconButton>
-              </CardActions>
-
-            </Card>
+            <PostCard
+              setUpdate={setUpdate}
+              item={item}
+            >
+            </PostCard>
           ))}
         </div>
       );
