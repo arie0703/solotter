@@ -22,6 +22,7 @@ class Post(models.Model):
     body = models.TextField()
     created_at = models.DateTimeField(default=timezone.now)
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
+    likes = models.IntegerField(default=0)
 
     def __str__(self):
         return self.body
