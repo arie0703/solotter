@@ -46,7 +46,7 @@ const App = ()  => {
       return (
         <div class="post_list">
           <div class="center">
-            <p>Solotter</p>
+            <p class="title">Solotter</p>
             <NewPost
               setUpdate={setUpdate}
             />
