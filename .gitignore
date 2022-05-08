@@ -1,4 +1,5 @@
 .env
 mysql_volume/*
 sql/init.sql
-node_modules
+node_modules/
+.vscode/

@@ -48,7 +48,7 @@ class NewPost extends Component {
             sx={{width: "40%",outlineColor: '#fff', }}
             type="text"
             InputLabelProps={{ style: {color: 'white'}}}
-            label="body" 
+            label="何か呟いていくかい・・？" 
             defaultValue="" 
             variant="outlined"
             margin="dense"

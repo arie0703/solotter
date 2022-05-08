@@ -8,6 +8,7 @@ import Typography from '@mui/material/Typography';
 import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import LightIcon from '@mui/icons-material/Light';
 import Box from '@mui/material/Box';
 import * as party from "party-js";
 
@@ -16,11 +17,17 @@ class PostCard extends Component {
         super(props)
     }
     deletePost = (id) => {
-        let instance = axios.create({
-          baseURL: 'http://localhost:8080',
-        })
-        instance.delete('/api/posts/delete/' + id)
-        this.props.setUpdate(true)
+
+        var result = window.confirm("投稿を削除しますか？")
+
+        if (result) {
+            let instance = axios.create({
+                baseURL: 'http://localhost:8080',
+            })
+            instance.delete('/api/posts/delete/' + id)
+            this.props.setUpdate(true)
+        }
+        
     }
 
     pushLike = (id, item) => {
@@ -42,13 +49,22 @@ class PostCard extends Component {
         });
     }
 
+    turnOnNeonLight = (id) => {
+        var element = document.getElementById("post-" + id);
+        if (element.classList.contains('neon')) {
+            element.classList.remove('neon')
+        } else {
+            element.classList.add('neon')
+        }
+    }
+
 
 
     render() {
         return(
             <Card class="post">
                 <CardContent>
-                <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                <Typography sx={{ mb: 1.5 }} color="text.secondary" id={"post-" + this.props.item.id}>
                     {this.props.item.body}
                 </Typography>
                 <Typography variant="caption">
@@ -66,6 +82,11 @@ class PostCard extends Component {
                         <FavoriteIcon />
                     </IconButton>
                     <Typography variant="caption">{this.props.item.likes}</Typography>
+                </Box>
+                <Box>
+                    <IconButton sx={{color: "#ffaa00"}} onClick={() => {this.turnOnNeonLight(this.props.item.id)}}>
+                        <LightIcon />
+                    </IconButton>
                 </Box>
                 </CardActions>
             </Card>
