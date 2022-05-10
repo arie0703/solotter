@@ -74,12 +74,10 @@ fieldset {
 }
 
 .neon {
-  font-size: 30px;
-  font-weight: 300;
   font-style: italic;
   color: #fff;
   text-transform: uppercase;
-  animation: text-neon 1.5s infinite alternate;
+  animation: text-neon 0.3s infinite alternate;
   margin: 10px auto;
 }
 
@@ -121,5 +119,28 @@ fieldset {
   20%, 24%, 55% {
       text-shadow: none;
       box-shadow: none;
+  }
+}
+
+.flash {
+  animation: flash 0.2s infinite alternate;
+}
+@keyframes flash {
+   0%{ background:#454557 }
+ 100%{ background:#282828   }
+
+  0%, 21%, 23%, 25%   {
+    box-shadow:
+        -0.2rem -0.2rem 1rem #ffbb88,
+        0.2rem 0.2rem 1rem #ffbb88,
+        0 0 2rem #ffaa00,
+        0 0 4rem #ffaa00;
+  }
+  19%, 54%, 56%, 100% {
+    box-shadow:
+        -0.2rem -0.2rem 1rem #bb88ff,
+        0.2rem 0.2rem 1rem #bb88ff,
+        0 0 2rem #aa00ff,
+        0 0 4rem #aa00ff;
   }
 }

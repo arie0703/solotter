@@ -49,12 +49,25 @@ class PostCard extends Component {
         });
     }
 
+    letsPartyTime(id) {
+        document.querySelector("#light-button-" + id).addEventListener("click", function (e) {
+            party.sparkles(this, {
+                count: party.variation.range(10, 10),
+            });
+        });
+    }
     turnOnNeonLight = (id) => {
-        var element = document.getElementById("post-" + id);
-        if (element.classList.contains('neon')) {
-            element.classList.remove('neon')
+        var body = document.getElementById("post-" + id);
+        var card = document.getElementById("card-" + id);
+
+        if (body.classList.contains('neon')) {
+            body.classList.remove('neon')
+            card.classList.remove('flash')
         } else {
-            element.classList.add('neon')
+            body.classList.add('neon')
+            card.classList.add('flash')
+            this.letsPartyTime(id);
+            console.log("yeah")
         }
     }
 
@@ -62,7 +75,7 @@ class PostCard extends Component {
 
     render() {
         return(
-            <Card class="post">
+            <Card class="post" id={"card-" + this.props.item.id }>
                 <CardContent>
                 <Typography sx={{ mb: 1.5 }} color="text.secondary" id={"post-" + this.props.item.id}>
                     {this.props.item.body}
@@ -84,7 +97,7 @@ class PostCard extends Component {
                     <Typography variant="caption">{this.props.item.likes}</Typography>
                 </Box>
                 <Box>
-                    <IconButton sx={{color: "#ffaa00"}} onClick={() => {this.turnOnNeonLight(this.props.item.id)}}>
+                    <IconButton sx={{color: "#ffaa00"}} onClick={() => {this.turnOnNeonLight(this.props.item.id)}} id={'light-button-' + this.props.item.id}>
                         <LightIcon />
                     </IconButton>
                 </Box>
